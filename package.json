@@ -1,0 +1,24 @@
+{
+  "name": "nuxt-developer-test",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^4.4.8",
+    "vue": "^3.5.35",
+    "vue-router": "^5.1.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
+    "@prisma/client": "^7.8.0",
+    "prisma": "^7.8.0",
+    "tsx": "^4.22.4",
+    "zod": "^4.4.3"
+  }
+}
