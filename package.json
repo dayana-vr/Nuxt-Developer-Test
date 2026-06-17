@@ -9,15 +9,21 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "@vueuse/core": "^14.3.0",
     "nuxt": "^4.4.8",
+    "prisma": "^6.19.3",
     "vue": "^3.5.35",
-    "vue-router": "^5.1.0"
+    "vue-router": "^5.1.0",
+    "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",
-    "@prisma/client": "^7.8.0",
-    "prisma": "^7.8.0",
+    "@types/node": "^25.9.3",
     "tsx": "^4.22.4",
     "zod": "^4.4.3"
   }
