@@ -90,6 +90,15 @@
             <input v-model="form.name" class="input" />
           </div>
 
+          <div class="field" style="grid-column: span 2;">
+            <label>Category *</label>
+            <input
+              v-model="form.category"
+              class="input"
+              required
+            />
+          </div>
+
           <div class="field">
             <label>Image URL</label>
             <input v-model="form.imageUrl" class="input" />
