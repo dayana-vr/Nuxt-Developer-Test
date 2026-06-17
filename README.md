@@ -1,75 +1,118 @@
-# Nuxt Minimal Starter
+# Nuxt Product Management App
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A full-stack application built with Nuxt, Prisma, and PostgreSQL for product management.
 
-## Setup
+---
 
-Make sure to install dependencies:
+## Stack
 
-```bash
-# npm
+- Nuxt 4
+- TypeScript
+- Prisma ORM
+- PostgreSQL
+- Faker (@faker-js/faker)
+
+---
+
+## Installation
+
 npm install
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
+## Prisma Setup
 
-# bun
-bun install
-```
+npx prisma generate
+npx prisma db push
 
-## Development Server
+---
 
-Start the development server on `http://localhost:3000`:
+## Seed Database
 
-```bash
-# npm
+npx prisma db seed
+
+---
+
+## Run Project
+
 npm run dev
 
-# pnpm
-pnpm dev
+---
 
-# yarn
-yarn dev
+## Environment Variables
 
-# bun
-bun run dev
-```
+DATABASE_URL="postgresql://user:password@localhost:5432/nuxt_test?schema=public"
 
-## Production
+---
 
-Build the application for production:
+## Features
 
-```bash
-# npm
-npm run build
+### Public Frontend
 
-# pnpm
-pnpm build
+- Product listing with pagination
+- Only products with isPublic: true are shown
+- Product detail page
+- Search by name
+- Filters by category and price range
 
-# yarn
-yarn build
+---
 
-# bun
-bun run build
-```
+### Admin Panel
 
-Locally preview production build:
+- Full CRUD for products
+- Table view of all products
+- Create and edit modal
+- Delete confirmation
+- Visibility control (isPublic)
+- Pagination
 
-```bash
-# npm
-npm run preview
+---
 
-# pnpm
-pnpm preview
+## API Endpoints
 
-# yarn
-yarn preview
+- GET /api/products → list products with filters and pagination
+- GET /api/products/:id → product detail
+- POST /api/products → create product
+- PATCH /api/products/:id → update product
+- DELETE /api/products/:id → delete product
 
-# bun
-bun run preview
-```
+---
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## Data Model
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  price       Float
+  stock       Int
+  category    String
+  imageUrl    String?
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+---
+
+## Routes
+
+### Public
+
+- / → product listing
+- /products/[id] → product detail page
+
+### Admin
+
+- /admin/products → product management
+
+---
+
+## Technical Notes
+
+- Architecture based on composables
+- Nuxt server API routes
+- Prisma ORM layer
+- Fully typed with TypeScript
+- Backend filtering logic
+- Complete CRUD implementation
