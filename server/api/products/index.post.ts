@@ -1,4 +1,6 @@
-export default defineEventHandler(async (event) => {
+import { Product } from "@prisma/client"
+
+export default defineEventHandler(async (event): Promise<Product> => {
     const body = await readBody(event)
 
     if (!body?.name || !body?.price || !body?.stock || !body?.category) {
@@ -8,7 +10,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const product = await prisma.product.create({
+    const product: Product = await prisma.product.create({
         data: {
             name: body.name,
             description: body.description ?? "",

@@ -1,8 +1,9 @@
 import { prisma } from "~~/server/utils/prisma"
 import type { Prisma } from "@prisma/client"
+import { ProductFilters, ProductResponse } from "~~/server/types/product"
 
-export default defineEventHandler(async (event) => {
-    const query = getQuery(event)
+export default defineEventHandler(async (event): Promise<ProductResponse> => {
+    const query: ProductFilters = getQuery(event)
 
     const page = Math.max(1, Number(query.page ?? 1))
     const limit = Math.min(100, Math.max(1, Number(query.limit ?? 10)))

@@ -8,6 +8,7 @@
 
       <div class="actions">
         <input v-model="search" placeholder="Search products..." class="input" />
+      
         <button class="btn primary" @click="openCreate" :disabled="loadingAction">
           + New
         </button>

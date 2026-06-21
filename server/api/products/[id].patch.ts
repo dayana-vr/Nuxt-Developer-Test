@@ -1,4 +1,6 @@
-export default defineEventHandler(async (event) => {
+import { Product } from "@prisma/client"
+
+export default defineEventHandler(async (event): Promise<Product> => {
     const id = getRouterParam(event, "id")
     const body = await readBody(event)
 
@@ -9,7 +11,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const product = await prisma.product.findUnique({
+    const product: Product | null = await prisma.product.findUnique({
         where: { id }
     })
 
@@ -20,7 +22,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const updated = await prisma.product.update({
+    const updated: Product = await prisma.product.update({
         where: { id },
         data: {
             name: body.name ?? product.name,

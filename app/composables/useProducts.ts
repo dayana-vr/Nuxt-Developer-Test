@@ -31,7 +31,6 @@ export const useProducts = () => {
 
             products.value = (res.data ?? [])
                 .slice()
-                .sort((a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" }))
 
             return res
         } catch (e) {

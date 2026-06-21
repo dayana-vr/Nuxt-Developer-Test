@@ -7,8 +7,6 @@ export interface Product {
     category: string
     imageUrl?: string | null
     isPublic: boolean
-    createdAt: string
-    updatedAt: string
 }
 
 export interface ProductFilters {

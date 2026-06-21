@@ -1,6 +1,7 @@
+import { Product } from "@prisma/client"
 import { prisma } from "~~/server/utils/prisma"
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<Product> => {
 
     const id = getRouterParam(event, "id")
 
@@ -11,7 +12,7 @@ export default defineEventHandler(async (event) => {
         })
     }
 
-    const product = await prisma.product.findUnique({
+    const product: Product | null = await prisma.product.findUnique({
         where: {
             id
         }
