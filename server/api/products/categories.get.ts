@@ -2,6 +2,9 @@ import { prisma } from "~~/server/utils/prisma"
 
 export default defineEventHandler(async () => {
     const result = await prisma.product.findMany({
+        where: {
+            isPublic: true
+        },
         distinct: ["category"],
         select: {
             category: true

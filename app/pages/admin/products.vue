@@ -157,6 +157,7 @@
 </template>
 
 <script setup lang="ts">
+  import { toast } from "vue-sonner"
   import { useDebounce } from "@vueuse/core"
   import { productSchema } from "~~/utils/productSchema"
   import type { Product } from "~/types/product"
@@ -279,16 +280,35 @@
 
     try {
       if (editingId.value) {
-        await updateProduct(editingId.value, result.data)
+        await updateProduct(
+          editingId.value,
+          result.data
+        )
+
+        toast.success("Product updated successfully", {
+          description: `${form.value.name} was updated`
+        })
+
       } else {
         await createProduct(result.data)
+
+        toast.success("Product created successfully", {
+          description: `${form.value.name} was added`
+        })
       }
 
       showModal.value = false
       await load()
+
     } catch {
+
       error.value = true
       errorMessage.value = "Error saving product"
+
+      toast.error("Something went wrong", {
+        description: errorMessage.value
+      })
+
     } finally {
       loadingAction.value = false
     }
@@ -324,6 +344,9 @@
     } catch {
       error.value = true
       errorMessage.value = "Error updating visibility"
+      toast.error("Update failed", {
+        description: errorMessage.value
+      })
     } finally {
       loadingAction.value = false
     }
@@ -344,15 +367,30 @@
       clearError()
 
       try {
+
         await deleteProduct(deleteId.value)
+
         await load()
+
+        toast.success("Product deleted", {
+          description: "The product was removed permanently",
+        })
+
       } catch {
+
         error.value = true
         errorMessage.value = "Error deleting product"
+
+        toast.error("Delete failed", {
+          description: errorMessage.value
+        })
+
       } finally {
+
         loadingAction.value = false
         showDeleteModal.value = false
         deleteId.value = null
+
       }
     }
 

@@ -1,7 +1,18 @@
 <template>
   <div class="product-card">
     <div class="product-card__imageWrapper">
-      <img :src="product.imageUrl" class="product-card__image" />
+      
+      <img
+        v-if="!imgError"
+        :src="product.imageUrl"
+        class="product-card__image"
+        @error="onError"
+      />
+
+      <div v-else class="product-card__imageFallback">
+        Image not available
+      </div>
+
     </div>
 
     <div class="product-card__content">
@@ -36,7 +47,11 @@
 
 <script setup lang="ts">
   defineProps<{ product: any }>()
-  defineEmits<{
-    (e: "view", product: any): void
-  }>()
+  defineEmits<{ (e: "view", product: any): void }>()
+
+  const imgError = ref(false)
+
+  const onError = () => {
+    imgError.value = true
+  }
 </script>
